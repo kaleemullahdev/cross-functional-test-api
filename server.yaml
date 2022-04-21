@@ -1,0 +1,32 @@
+version: '3.5'
+services:
+    mongodb:
+        env_file:
+            - .env
+        image: mongo:latest
+        # container_name: 'cross-functional-test-api-db'
+        networks:
+            - cross-functional-test-api-network
+        restart: on-failure
+        ports:
+            - 27017:27017
+        environment:
+            - MONGO_INITDB_ROOT_USERNAME=${DATABASE_USER}
+            - MONGO_INITDB_ROOT_PASSWORD=${DATABASE_PASSWORD}
+
+    cross-functional-test-api:
+        build: .
+        image: 'cross-functional-test-api:0.10'
+        container_name: 'cross-functional-test-api-services'
+        restart: on-failure
+        networks:
+            - cross-functional-test-api-network
+        ports:
+            - '4000:4000'
+        depends_on:
+            - mongodb
+
+networks:
+    cross-functional-test-api-network:
+        external: false
+        name: cross-functional-test-api-network
