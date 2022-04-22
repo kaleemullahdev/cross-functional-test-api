@@ -13,9 +13,9 @@ services:
             - MONGO_INITDB_ROOT_USERNAME=${DATABASE_USER}
             - MONGO_INITDB_ROOT_PASSWORD=${DATABASE_PASSWORD}
 
-    mern-blue-print:
+    cross-functional-test-api:
         build: .
-        image: 'cross-functional-test-api:0.1'
+        image: 'cross-functional-test-api:0.2'
         container_name: 'cross-functional-test-api'
         restart: on-failure
         networks:
@@ -26,6 +26,6 @@ services:
             - mongodb
 
 networks:
-    cross-functional-test-api:
+    cross-functional-test-api-network:
         external: false
-        name: cross-functional-test-api
+        name: cross-functional-test-api-network
