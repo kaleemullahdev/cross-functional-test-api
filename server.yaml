@@ -4,7 +4,6 @@ services:
         env_file:
             - .env
         image: mongo:latest
-        # container_name: 'cross-functional-test-api-db'
         networks:
             - cross-functional-test-api-network
         restart: on-failure
@@ -14,10 +13,10 @@ services:
             - MONGO_INITDB_ROOT_USERNAME=${DATABASE_USER}
             - MONGO_INITDB_ROOT_PASSWORD=${DATABASE_PASSWORD}
 
-    cross-functional-test-api:
+    mern-blue-print:
         build: .
-        image: 'cross-functional-test-api:0.10'
-        container_name: 'cross-functional-test-api-services'
+        image: 'cross-functional-test-api:0.1'
+        container_name: 'cross-functional-test-api'
         restart: on-failure
         networks:
             - cross-functional-test-api-network
@@ -27,6 +26,6 @@ services:
             - mongodb
 
 networks:
-    cross-functional-test-api-network:
+    cross-functional-test-api:
         external: false
-        name: cross-functional-test-api-network
+        name: cross-functional-test-api
